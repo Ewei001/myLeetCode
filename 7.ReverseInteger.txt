@@ -1,0 +1,17 @@
+最开始没有考虑到溢出的情况，怎么写都通不过编译，很是郁闷
+后来看了别人的答案才明白
+如果没有溢出存在，“（newResult - tail）/ 10”应该等于“result”。如果发生溢出，它们不能相等。
+
+public class Solution {
+    public int reverse(int x) {
+        int rNum = 0;
+        while(x != 0){
+            int tail = x%10;
+            int nRNum = rNum * 10 + tail;
+            if((nRNum - tail) / 10 != rNum) return 0;
+            rNum = nRNum;
+            x /= 10;
+        }
+        return rNum;
+    }
+}

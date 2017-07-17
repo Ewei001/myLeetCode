@@ -1,0 +1,24 @@
+感觉自己真实太蠢了
+看到题目的第一个想法竟然是先转成字符串再转成数组判断……
+public boolean isPalindrome(int x) {
+    return isP( ((Integer)x).toString() );
+}
+
+public boolean isP(String str) {
+    if(str.equals("") || str.length()==1) return true;
+    return (str.charAt(0)==str.charAt(str.length()-1)) && isP(str.substring(1,str.length()-1));
+}
+正常的解法就是下面这样把数字逆转再判等
+等刷第二遍再想想其它的想法~
+public class Solution {
+    public boolean isPalindrome(int x) {
+        
+       if (x<0 || (x!=0 && x%10==0)) return false;
+    int rev = 0;
+    while (x>rev){
+    	rev = rev*10 + x%10;
+    	x = x/10;
+    }
+    return (x==rev || x==rev/10);
+    }
+}

@@ -1,0 +1,24 @@
+开始拿到这道题没有看懂题目的意思
+大概规则：
+Each row must have the numbers 1-9 occuring just once.
+Each column must have the numbers 1-9 occuring just once
+And the numbers 1-9 must occur just once in each of the 9 sub-boxes of the grid.
+
+public class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        for(int i = 0; i < 9; i++){
+            HashSet<Character> rows = new HashSet<>();
+            HashSet<Character> cols = new HashSet<>();
+            HashSet<Character> cube = new HashSet<>();
+            for(int j = 0; j < 9; j++){
+                if(board[i][j] != '.' && !rows.add(board[i][j])) return false;
+                if(board[j][i] != '.' && !cols.add(board[j][i])) return false;
+                
+                int rowIncre = 3 * (i/3);
+                int colIncre = 3 * (i%3);
+                if(board[rowIncre + j/3][colIncre + j%3] != '.' && !cube.add(board[rowIncre + j/3][colIncre + j%3])) return false;
+            }
+        }
+        return true;
+    }
+}

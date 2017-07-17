@@ -1,0 +1,22 @@
+通过这几天做了这几道题，看了看别人的解答，深深地感受到了智商的差距
+希望自己经过一段时间的训练后有所进步吧
+这一题最开始的想法是
+先取到数组中最短的字符串长度，再遍历数组的每个字符串，逐个字符
+设flag标志位true，若有不相等，则将flag变为false，一层循环后若flag为true，则在str上追加一个字符
+最后返回str即前缀
+
+正常的解法，直接用indexOf检测字符串中是否含有该前缀
+public class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        if(strs == null || strs.length == 0){
+            return "";
+        }
+        String pre = strs[0];
+        for(int i = 1; i < strs.length; i++){
+            while(strs[i].indexOf(pre) != 0){
+                pre = pre.substring(0, pre.length() - 1);
+            }
+        }
+        return pre;
+    }
+}

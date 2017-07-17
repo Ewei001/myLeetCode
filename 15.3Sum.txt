@@ -1,0 +1,24 @@
+开始我直接就写了个三重循环，最后的结果中会出现重复的。
+然后看了下别人的解法，基本思路：
+二重循环
+先将数组排好序最外层先逐个循环到length-3，内层使用sum = 0-nums[i];//为剩下两个元素的和
+分别为第一位和最后一位相加与sum比较,若相等则存入List，且第一位向后移一位，最后一位向前移一位。
+public List<List<Integer>> threeSum(int[] nums){
+  Arrays.sort(nums);
+  List<List<Integer>> result = new LinkedList<>();
+  for(int i = 0; i < nums.length - 2; i++){
+    if(i == 0 || (i > 0 && nums[i] != num[i-1])){
+      int hd = i+1, tl = nums.length-1, sum = 0-nums[i];
+	  while(hd < tl){
+	    if(nums[hd] + nums[tl] == sum){
+		  result.add(Arrays.asList(nums[i],nums[hd],nums[tl]));
+		  while(hd < tl && nums[hd] == nums[hd+1]) hd++;
+		  while(hd < tl && nums[tl] == nums[tl-1]) tl--;//这里不可以在循环中自增自减
+		  hd++;tl--;
+	    }else if(nums[hd] + nums[tl] < sum) hd++;
+		else tl--;
+	  }
+	}
+  }
+  return result;
+}

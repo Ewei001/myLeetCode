@@ -1,0 +1,48 @@
+首先我们需要对罗马数字进行一个简单的了解：
+基本字符：
+　　I、V、X、L、C、D、M
+　　相应的阿拉伯数字表示为：
+　　1．5、10、50、100、500、1000
+　　(1)相同的数字连写，所表示的数等于这些数字相加得到的数，如：Ⅲ = 3；
+　　(2)小的数字在大的数字的右边，所表示的数等于这些数字相加得到的数， 如：Ⅷ = 8；Ⅻ = 12；
+　　(3)小的数字，（限于Ⅰ、X 和C）在大的数字的左边，所表示的数等于大数减小数得到的数，如：Ⅳ= 4；Ⅸ= 9；
+　　(4)正常使用时连写的数字重复不得超过三次。（表盘上的四点钟--“IIII”，例外。）
+　　(5)在一个数的上面画一条横线，表示这个数增值1000 倍。
+public class Solution {
+ public int romanToInt(String s) {
+    int nums[]=new int[s.length()];
+    for(int i=0;i<s.length();i++){
+        switch (s.charAt(i)){
+            case 'M':
+                nums[i]=1000;
+                break;
+            case 'D':
+                nums[i]=500;
+                break;
+            case 'C':
+                nums[i]=100;
+                break;
+            case 'L':
+                nums[i]=50;
+                break;
+            case 'X' :
+                nums[i]=10;
+                break;
+            case 'V':
+                nums[i]=5;
+                break;
+            case 'I':
+                nums[i]=1;
+                break;
+        }
+    }
+    int sum=0;
+    for(int i=0;i<nums.length-1;i++){
+        if(nums[i]<nums[i+1])
+            sum-=nums[i];
+        else
+            sum+=nums[i];
+    }
+    return sum+nums[nums.length-1];
+}
+}

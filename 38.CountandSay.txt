@@ -1,0 +1,32 @@
+真心没看懂题目什么意思
+The count-and-say sequence is the sequence of integers beginning as follows:
+1, 11, 21, 1211, 111221, ...
+
+1 is read off as "one 1" or 11.
+11 is read off as "two 1s" or 21.
+21 is read off as "one 2, then one 1" or 1211.
+Given an integer n, generate the nth sequence.
+
+Note: The sequence of integers will be represented as a string.
+
+public class Solution {
+    public String countAndSay(int n) {
+        Map<Integer, Integer> signNum = new HashMap<Integer, Integer>();
+        while(n != 0){
+            int end = n % 10;
+            if(signNum.containsKey(end)){
+                signNum.put(end, signNum.get(end)+1);
+            }else{
+                signNum.put(end, 1);
+            }
+            n /= 10;
+        }
+        String s = "";
+        for(int key : signNum.keySet()){
+            int keyNum = signNum.get(key);
+            s += String.valueOf(keyNum) + String.valueOf(key); 
+        }
+        return s;
+    }
+}
+不应该就是返回几个几吗，为什么1返回不是11而是1？

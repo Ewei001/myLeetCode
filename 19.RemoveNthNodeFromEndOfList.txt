@@ -1,0 +1,30 @@
+思路：构造两个节点分别指向第0个和第k个节点
+然后进行遍历等于next，当第k个节点的next为空时，
+原来指向第0节点则指向倒数第n+1个节点，另.next = next.next即可
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode curHead = new ListNode(0);
+        curHead.next = head;
+        ListNode curPre = curHead, tail = curHead;
+
+        int i = 0;
+        while(i <= n){
+            tail = tail.next;
+            i++;
+        }
+        while(tail != null){
+            curPre = curPre.next;
+            tail = tail.next;
+        }
+        curPre.next = curPre.next.next;
+        return curHead.next;
+    }
+}
