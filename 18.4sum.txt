@@ -1,0 +1,164 @@
+基本思路：先将数组排好序，每层循环分别从头尾开始遍历，求和后与target比较大小，大的话从后向前的下表减一，小的话从前向后的下标加一，给出如下o(n^2)的算法：
+但是最后结果还是说有问题，报的错大概原因是，以下算法中得出的结果一维数组中不会有重复的值，举个例子：
+input:[-3,-1,0,2,4,5]  0
+对应的output是[[-3,-1,0,4],[-1,0,2,-1]]，这里面的-1在input中只出现一次，但是在二维数组的第二列中却出现两个。
+因此笔者又看了下讨论区别人的答案，给出方法二和主要思想。但是感觉方法二也不会出现重复值吖……
+先把问题留在这…… 多练习一段时间再回头看，可能是脑子某根筋还没通……
+方法一：
+public List<List<Integer>> fourSum(int[] nums, int target) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        if(nums == null || nums.length < 4){
+            return result;
+        }
+        
+        int outerTail = nums.length - 1;
+        int innerTail;
+        int tmp;
+        Arrays.sort(nums);
+        if(nums[0] * 4 > target || nums[outerTail] * 4 < target){
+            return result;
+        }
+        
+        for(int i = 0; i < outerTail; i++){
+            innerTail = outerTail - 1;
+            for(int j = i + 1; j < innerTail; ){
+                if(nums[i] + nums[j] + nums[innerTail] + nums[outerTail] == target){
+                    List<Integer> arr = new ArrayList<Integer>();
+                    arr.add(nums[i]);
+                    arr.add(nums[j]);
+                    arr.add(nums[innerTail]);
+                    arr.add(nums[outerTail]);
+                    result.add(arr);
+                    if(j + 1 < innerTail - 1){
+                        j++;
+                        innerTail--;
+                    }else{
+                        break;
+                    }
+                }else if(nums[i] + nums[j] + nums[innerTail] + nums[outerTail] < target){
+                    if(j + 1 >= innerTail){
+                        continue;
+                    }else{
+                        j++;
+                    }
+                    
+                }else{
+                    if(j + 1 >= innerTail){
+                        outerTail--;
+                    }else{
+                        innerTail--;
+                    }
+                    
+                }
+            }
+        }
+        return result;
+    }
+	
+	方法二：
+	基本思想：在每一层循环中嵌套递归
+	public List<List<Integer>> fourSum(int[] nums, int target) {
+		ArrayList<List<Integer>> res = new ArrayList<List<Integer>>();
+		int len = nums.length;
+		if (nums == null || len < 4)
+			return res;
+
+		Arrays.sort(nums);
+
+		int max = nums[len - 1];
+		if (4 * nums[0] > target || 4 * max < target)
+			return res;
+
+		int i, z;
+		for (i = 0; i < len; i++) {
+			z = nums[i];
+			if (i > 0 && z == nums[i - 1])// avoid duplicate
+				continue;
+			if (z + 3 * max < target) // z is too small
+				continue;
+			if (4 * z > target) // z is too large
+				break;
+			if (4 * z == target) { // z is the boundary
+				if (i + 3 < len && nums[i + 3] == z)
+					res.add(Arrays.asList(z, z, z, z));
+				break;
+			}
+
+			threeSumForFourSum(nums, target - z, i + 1, len - 1, res, z);
+		}
+
+		return res;
+	}
+
+	/*
+	 * Find all possible distinguished three numbers adding up to the target
+	 * in sorted array nums[] between indices low and high. If there are,
+	 * add all of them into the ArrayList fourSumList, using
+	 * fourSumList.add(Arrays.asList(z1, the three numbers))
+	 */
+	public void threeSumForFourSum(int[] nums, int target, int low, int high, ArrayList<List<Integer>> fourSumList,
+			int z1) {
+		if (low + 1 >= high)
+			return;
+
+		int max = nums[high];
+		if (3 * nums[low] > target || 3 * max < target)
+			return;
+
+		int i, z;
+		for (i = low; i < high - 1; i++) {
+			z = nums[i];
+			if (i > low && z == nums[i - 1]) // avoid duplicate
+				continue;
+			if (z + 2 * max < target) // z is too small
+				continue;
+
+			if (3 * z > target) // z is too large
+				break;
+
+			if (3 * z == target) { // z is the boundary
+				if (i + 1 < high && nums[i + 2] == z)
+					fourSumList.add(Arrays.asList(z1, z, z, z));
+				break;
+			}
+
+			twoSumForFourSum(nums, target - z, i + 1, high, fourSumList, z1, z);
+		}
+
+	}
+
+	/*
+	 * Find all possible distinguished two numbers adding up to the target
+	 * in sorted array nums[] between indices low and high. If there are,
+	 * add all of them into the ArrayList fourSumList, using
+	 * fourSumList.add(Arrays.asList(z1, z2, the two numbers))
+	 */
+	public void twoSumForFourSum(int[] nums, int target, int low, int high, ArrayList<List<Integer>> fourSumList,
+			int z1, int z2) {
+
+		if (low >= high)
+			return;
+
+		if (2 * nums[low] > target || 2 * nums[high] < target)
+			return;
+
+		int i = low, j = high, sum, x;
+		while (i < j) {
+			sum = nums[i] + nums[j];
+			if (sum == target) {
+				fourSumList.add(Arrays.asList(z1, z2, nums[i], nums[j]));
+
+				x = nums[i];
+				while (++i < j && x == nums[i]) // avoid duplicate
+					;
+				x = nums[j];
+				while (i < --j && x == nums[j]) // avoid duplicate
+					;
+			}
+			if (sum < target)
+				i++;
+			if (sum > target)
+				j--;
+		}
+		return;
+	}
