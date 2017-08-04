@@ -1,3 +1,36 @@
+2017.8.4
+今天再次看这道题开始还是有误解，最后看了别人的答案，恍然大悟！
+原本宝宝理解成这样了：比如传入n即为初始值，假设n为8，则第二行为18，第三行为1118，第四行为3118……以此类推。
+实际题目意思是根据传入的参数n，输出第n组的结果！！初始值为1，给出如下算法：
+public String countAndSay(int n){
+	StringBuilder curr = new StringBuilder("1");//初始值为1
+	StringBuilder prev;
+	int count;
+	char say;
+	for(int i = 1; i < n; i++){
+	    prev = curr;
+		count = 1;
+		curr = new StringBuilder();
+	    say = prev.cahrAt(0);
+		for(int j = 1; j < prev.length(); j++){
+		    if(prev.charAt(j) != say){
+			    curr.append(count).append(say);
+				count = 1;
+				say = prev.cahrAt(j);
+			}else{
+			    count++;
+			}
+		}
+		curr.append(count).append(say);//这一步漏掉的话就会少一位
+	}
+	return curr.toString();//最后不要忘了转换成String类型的
+}
+看了一下自己之前写的，就算是按给出的n进行递归，也不对，因为key值无重复，感觉到自己在一点点进步，开心~
+
+=====================================更新==========================================
+
+2017.1.22
+
 真心没看懂题目什么意思
 The count-and-say sequence is the sequence of integers beginning as follows:
 1, 11, 21, 1211, 111221, ...
@@ -30,3 +63,4 @@ public class Solution {
     }
 }
 不应该就是返回几个几吗，为什么1返回不是11而是1？
+
