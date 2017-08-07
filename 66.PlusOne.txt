@@ -1,3 +1,24 @@
+2017.8.7
+今天再看这个easy的题，理解又深刻一些~虽然两次答案差不多~
+public class Solution {
+    public int[] plusOne(int[] digits) {
+        int len = digits.length;
+        for(int i = len - 1; i >= 0; i--){
+            if(digits[i] < 9){
+                digits[i]++;
+                return digits;
+            }
+            digits[i] = 0;
+        }
+        int[] newArray = new int[len + 1];
+        newArray[0] = 1;
+        return newArray;//因为此时已是最高位，说明低位的全部都进位为0，因此无需将digits再赋给newArray，int默认初始化为0
+    }
+    
+}
+
+============================================================================
+2017.1.25
 又是没看懂题目的一道
 看了别人的解答和讨论才大概明白：
 用非空数组来表示非负整数，然后加1.
