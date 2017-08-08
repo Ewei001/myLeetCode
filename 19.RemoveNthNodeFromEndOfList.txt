@@ -1,6 +1,6 @@
-˼·�����������ڵ�ֱ�ָ���0���͵�k���ڵ�
-Ȼ����б�������next������k���ڵ��nextΪ��ʱ��
-ԭ��ָ���0�ڵ���ָ������n+1���ڵ㣬��.next = next.next����
+思路：构造两个节点分别指向第0个和第k个节点
+然后进行遍历等于next，当第k个节点的next为空时，
+原来指向第0节点则指向倒数第n+1个节点，另.next = next.next即可
 /**
  * Definition for singly-linked list.
  * public class ListNode {

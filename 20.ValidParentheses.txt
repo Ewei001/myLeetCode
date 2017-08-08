@@ -1,4 +1,4 @@
-·¨Ò»£º
+æ³•ä¸€ï¼š
 public class Solution {
     public boolean isValid(String s) {
         String left = "({[";
@@ -9,15 +9,15 @@ public class Solution {
             int c = left.indexOf(s.charAt(i));
             if(c != -1){
                 st.push(right[c]);
-            }else if(st.isEmpty() || st.pop() != s.charAt(i)){//ÕâÀïÅĞ¿ÕÊÇÅÅ³ıÁËÖ»ÓĞÓÒÀ¨ºÅµÄÇé¿ö
+            }else if(st.isEmpty() || st.pop() != s.charAt(i)){//è¿™é‡Œåˆ¤ç©ºæ˜¯æ’é™¤äº†åªæœ‰å³æ‹¬å·çš„æƒ…å†µ
                 return false;
             }
             
         }
-        return st.isEmpty();//×îºóÕâÀïÈİÒ×¸ã´í£¬¿ªÊ¼ÎÒÖ±½Ó·µ»ØÁËtrue¾Í³ö´íÁË
-    }//ÕâÀïÅÅ³ıÖ»ÓĞÓÒÀ¨ºÅµÄÇé¿ö
+        return st.isEmpty();//æœ€åè¿™é‡Œå®¹æ˜“æé”™ï¼Œå¼€å§‹æˆ‘ç›´æ¥è¿”å›äº†trueå°±å‡ºé”™äº†
+    }//è¿™é‡Œæ’é™¤åªæœ‰å³æ‹¬å·çš„æƒ…å†µ
 }
-others' codes://Õâ¸ö´úÂëºÜ¼ò½à£¬
+others' codes://è¿™ä¸ªä»£ç å¾ˆç®€æ´ï¼Œ
 public boolean isValid(String s) {
 	Stack<Character> stack = new Stack<Character>();
 	for (char c : s.toCharArray()) {

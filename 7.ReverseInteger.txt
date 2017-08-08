@@ -1,6 +1,6 @@
-×î¿ªÊ¼Ã»ÓÐ¿¼ÂÇµ½Òç³öµÄÇé¿ö£¬ÔõÃ´Ð´¶¼Í¨²»¹ý±àÒë£¬ºÜÊÇÓôÃÆ
-ºóÀ´¿´ÁË±ðÈËµÄ´ð°¸²ÅÃ÷°×
-Èç¹ûÃ»ÓÐÒç³ö´æÔÚ£¬¡°£¨newResult - tail£©/ 10¡±Ó¦¸ÃµÈÓÚ¡°result¡±¡£Èç¹û·¢ÉúÒç³ö£¬ËüÃÇ²»ÄÜÏàµÈ¡£
+æœ€å¼€å§‹æ²¡æœ‰è€ƒè™‘åˆ°æº¢å‡ºçš„æƒ…å†µï¼Œæ€Žä¹ˆå†™éƒ½é€šä¸è¿‡ç¼–è¯‘ï¼Œå¾ˆæ˜¯éƒé—·
+åŽæ¥çœ‹äº†åˆ«äººçš„ç­”æ¡ˆæ‰æ˜Žç™½
+å¦‚æžœæ²¡æœ‰æº¢å‡ºå­˜åœ¨ï¼Œâ€œï¼ˆnewResult - tailï¼‰/ 10â€åº”è¯¥ç­‰äºŽâ€œresultâ€ã€‚å¦‚æžœå‘ç”Ÿæº¢å‡ºï¼Œå®ƒä»¬ä¸èƒ½ç›¸ç­‰ã€‚
 
 public class Solution {
     public int reverse(int x) {

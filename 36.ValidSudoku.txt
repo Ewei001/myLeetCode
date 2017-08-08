@@ -1,5 +1,5 @@
-¿ªÊ¼ÄÃµ½ÕâµÀÌâÃ»ÓĞ¿´¶®ÌâÄ¿µÄÒâË¼
-´ó¸Å¹æÔò£º
+å¼€å§‹æ‹¿åˆ°è¿™é“é¢˜æ²¡æœ‰çœ‹æ‡‚é¢˜ç›®çš„æ„æ€
+å¤§æ¦‚è§„åˆ™ï¼š
 Each row must have the numbers 1-9 occuring just once.
 Each column must have the numbers 1-9 occuring just once
 And the numbers 1-9 must occur just once in each of the 9 sub-boxes of the grid.

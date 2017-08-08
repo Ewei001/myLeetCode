@@ -7,7 +7,7 @@ public class Solution {
 }
 
 
-在没有其它现成方法调用的情况下可以：
+鍦ㄦ病鏈夊叾瀹冪幇鎴愭柟娉曡皟鐢ㄧ殑鎯呭喌涓嬪彲浠ワ細
 public int lengthOfLastWord(String s) {
     int len=s.length(), lastLength=0;
     

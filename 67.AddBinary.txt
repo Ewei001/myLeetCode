@@ -7,7 +7,7 @@ public class Solution {
             if (j >= 0) sum += b.charAt(j--) - '0';
             if (i >= 0) sum += a.charAt(i--) - '0';
             sb.append(sum % 2);
-            carry = sum / 2;//¿´ÊÇ·ñĞèÒªÏòÇ°½øÎ»
+            carry = sum / 2;//çœ‹æ˜¯å¦éœ€è¦å‘å‰è¿›ä½
         }
         if (carry != 0) sb.append(carry);
         return sb.reverse().toString();

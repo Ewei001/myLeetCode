@@ -1,10 +1,10 @@
-����˼·���Ƚ������ź���ÿ��ѭ���ֱ��ͷβ��ʼ��������ͺ���target�Ƚϴ�С����Ļ��Ӻ���ǰ���±���һ��С�Ļ���ǰ�����±��һ����������o(n^2)���㷨��
-�������������˵�����⣬���Ĵ����ԭ���ǣ������㷨�еó��Ľ��һά�����в������ظ���ֵ���ٸ����ӣ�
+基本思路：先将数组排好序，每层循环分别从头尾开始遍历，求和后与target比较大小，大的话从后向前的下表减一，小的话从前向后的下标加一，给出如下o(n^2)的算法：
+但是最后结果还是说有问题，报的错大概原因是，以下算法中得出的结果一维数组中不会有重复的值，举个例子：
 input:[-3,-1,0,2,4,5]  0
-��Ӧ��output��[[-3,-1,0,4],[-1,0,2,-1]]���������-1��input��ֻ����һ�Σ������ڶ�ά����ĵڶ�����ȴ����������
-��˱����ֿ��������������˵Ĵ𰸣���������������Ҫ˼�롣���Ǹо�������Ҳ��������ظ�ֵ߹����
-�Ȱ����������⡭�� ����ϰһ��ʱ���ٻ�ͷ��������������ĳ���ûͨ����
-����һ��
+对应的output是[[-3,-1,0,4],[-1,0,2,-1]]，这里面的-1在input中只出现一次，但是在二维数组的第二列中却出现两个。
+因此笔者又看了下讨论区别人的答案，给出方法二和主要思想。但是感觉方法二也不会出现重复值吖……
+先把问题留在这…… 多练习一段时间再回头看，可能是脑子某根筋还没通……
+方法一：
 public List<List<Integer>> fourSum(int[] nums, int target) {
         List<List<Integer>> result = new ArrayList<List<Integer>>();
         if(nums == null || nums.length < 4){
@@ -55,8 +55,8 @@ public List<List<Integer>> fourSum(int[] nums, int target) {
         return result;
     }
 	
-	��������
-	����˼�룺��ÿһ��ѭ����Ƕ�׵ݹ�
+	方法二：
+	基本思想：在每一层循环中嵌套递归
 	public List<List<Integer>> fourSum(int[] nums, int target) {
 		ArrayList<List<Integer>> res = new ArrayList<List<Integer>>();
 		int len = nums.length;

@@ -1,5 +1,5 @@
-¸Ğ¾õ×Ô¼ºÕæÊµÌ«´ÀÁË
-¿´µ½ÌâÄ¿µÄµÚÒ»¸öÏë·¨¾¹È»ÊÇÏÈ×ª³É×Ö·û´®ÔÙ×ª³ÉÊı×éÅĞ¶Ï¡­¡­
+æ„Ÿè§‰è‡ªå·±çœŸå®å¤ªè ¢äº†
+çœ‹åˆ°é¢˜ç›®çš„ç¬¬ä¸€ä¸ªæƒ³æ³•ç«Ÿç„¶æ˜¯å…ˆè½¬æˆå­—ç¬¦ä¸²å†è½¬æˆæ•°ç»„åˆ¤æ–­â€¦â€¦
 public boolean isPalindrome(int x) {
     return isP( ((Integer)x).toString() );
 }
@@ -8,8 +8,8 @@ public boolean isP(String str) {
     if(str.equals("") || str.length()==1) return true;
     return (str.charAt(0)==str.charAt(str.length()-1)) && isP(str.substring(1,str.length()-1));
 }
-Õı³£µÄ½â·¨¾ÍÊÇÏÂÃæÕâÑù°ÑÊı×ÖÄæ×ªÔÙÅĞµÈ
-µÈË¢µÚ¶ş±éÔÙÏëÏëÆäËüµÄÏë·¨~
+æ­£å¸¸çš„è§£æ³•å°±æ˜¯ä¸‹é¢è¿™æ ·æŠŠæ•°å­—é€†è½¬å†åˆ¤ç­‰
+ç­‰åˆ·ç¬¬äºŒéå†æƒ³æƒ³å…¶å®ƒçš„æƒ³æ³•~
 public class Solution {
     public boolean isPalindrome(int x) {
         
