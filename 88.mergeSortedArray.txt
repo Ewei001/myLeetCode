@@ -1,0 +1,17 @@
+拿到题目首先想到的是定义一个临时数组tmp保存nums1
+再将tmp与nums2中的元素逐个比较，按顺序存入nums1中，即从前往后的顺序
+
+方案二:
+从后向前的顺序
+public class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int i = m - 1, j = n - 1, k = m + n - 1;
+        while(i >= 0 && j >= 0){
+            nums1[k--] = nums1[i] > nums2[j] ? nums1[i--] : nums2[j--];
+        }
+        while(j >= 0){//因为结果保存至nums1，因此只需要判断nums2数组的长度即可
+            nums1[k--] = nums2[j--];
+        }
+    }
+}
+写的过程中总是遇到很多小问题，有些问题当前我也不太清楚，相信通过更多的练习，理解的会更深刻~

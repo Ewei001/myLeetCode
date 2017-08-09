@@ -1,0 +1,35 @@
+一直通不过，根据错误提示改了快100遍终于通过了，总感觉我写的有些复杂了……
+
+public class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        if(l1 == null || l2 == null) return l1 == null ? l2 : l1;
+        int carry = 0;
+        ListNode result = new ListNode(0);
+        ListNode curNode = result;
+        int curVal = 0;
+        while(l1 != null || l2 != null){
+            
+            if(l1 != null && l2 != null){
+                curVal = ((l1.val + l2.val) % 10 + carry) % 10;
+                carry = (l1.val + l2.val + carry) / 10;
+            }else if(l1 == null){
+                curVal = (l2.val + carry) % 10;
+                carry = (l2.val + carry) / 10;
+            }else{
+                curVal = (l1.val + carry) % 10;
+                carry = (l1.val + carry) / 10;
+            }            
+            ListNode tmp = new ListNode(curVal);
+            
+            curNode.next = tmp;
+            curNode = curNode.next;
+            if(l1 != null) l1 = l1.next;
+            if(l2 != null) l2 = l2.next;
+        }
+        if(carry != 0){
+            ListNode highNode = new ListNode(carry);
+            curNode.next = highNode;
+        }
+        return result.next;
+    }
+}
