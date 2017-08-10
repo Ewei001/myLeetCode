@@ -1,0 +1,42 @@
+这道题上面标注的是hard，但是宝宝感觉这题并不是很难，可能越往后的会越难。
+思路就是先将两个数组按顺序并到一个数组，再取中间的数值
+虽然题目不难，但是也花了两个多小时调试，一直有一点小问题。
+感受最深的是还是用编译器来调试排错比较方便。
+其中主要的一个问题是：return (nums[len / 2 - 1] + nums[len / 2]) / 2.0;
+如果最后写的是2的话，则结果就会整除，例如5.0 / 2 = 2.0，但是5.0 / 2.0 = 2.5;
+
+public class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int m = nums1.length - 1;
+        int n = nums2.length - 1;
+        
+        if(m < 0) return arrMid(nums2);
+        if(n < 0) return arrMid(nums1);
+        
+        int[] nums = new int[m + n + 2];
+        
+        for(int i = m + n + 1; i >= 0; i--){
+            if(m >= 0 && n >= 0){
+                if(nums1[m] > nums2[n]){
+                    nums[i] = nums1[m--];
+                }else{
+                    nums[i] = nums2[n--];
+                }
+            }else if(m >= 0){
+                nums[i] = nums1[m--];
+            }else{
+                nums[i] = nums2[n--];
+            }
+        }
+        return arrMid(nums);
+    }
+    
+    public double arrMid(int[] nums){
+        int len = nums.length;
+        if(len % 2 == 0){
+            return (nums[len / 2 - 1] + nums[len / 2]) / 2.0;
+        }else{
+            return nums[(len + 1) / 2 - 1];
+        }
+    } 
+}
