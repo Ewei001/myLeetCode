@@ -1,0 +1,20 @@
+拿到这个题目的第一想法是将字符存入二维数组中，但是，空格就在相对位置插入空格，因为无界题目是各一行就有跳格，最后看了别人的答案发现是只有第一行和最后一行有跳格
+以下给出看到别人的解答，着急自己的智商啊……
+public String convert(String s, int nRows) {
+
+    int len = s.length();
+    StringBuffer[] sb = new StringBuffer[nRows];
+    for (int i = 0; i < sb.length; i++) sb[i] = new StringBuffer();
+    
+    int i = 0;
+    while (i < len) {
+        for (int idx = 0; idx < nRows && i < len; idx++) // vertically down
+            sb[idx].append(s.charAt(i++));
+        for (int idx = nRows-2; idx >= 1 && i < len; idx--) // obliquely up
+            sb[idx].append(s.charAt(i++));
+    }
+    for (int idx = 1; idx < sb.length; idx++)
+        sb[0].append(sb[idx]);
+    return sb[0].toString();
+}
+大题思路：先纵向将字符依次赋给stringbuilder的每一位，知道字符串结束，最后将得到的numRows个stringbuilder连起来即可。
