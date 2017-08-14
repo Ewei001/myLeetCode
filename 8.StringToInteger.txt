@@ -1,0 +1,36 @@
+//看似简单的一道题，其实要考虑很多问题~
+1.去掉空格
+2.是否为空字符串
+3.考虑符号位（正负）
+4.除符号位之外是否还有其它奇怪的字符
+5.是否溢出
+public class Solution {
+    public int myAtoi(String str) {
+        //remove the spaces
+        String s = str.trim();
+        if(s.length() == 0) return 0;
+        int index = 0;
+        int total = 0;
+        
+        //handle sign + -
+        int sign = 1;
+        if(s.charAt(index) == '+' || s.charAt(index) == '-'){
+            sign = s.charAt(index) == '+' ? 1 : -1;
+            index++;
+        }
+        
+        //convert and overflow
+        while(index < s.length()){
+            int digit = s.charAt(index) - '0';
+            
+            if(digit < 0 || digit > 9) break;//本来少了这一句一直编译通不过,防止除了符号位之外还有其它符号
+
+            if(Integer.MAX_VALUE/10 < total || (Integer.MAX_VALUE/10 == total && Integer.MAX_VALUE % 10 < digit))
+                return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+            
+            total = total * 10 + digit;
+            index++;
+        }
+        return total * sign;
+    }
+}
