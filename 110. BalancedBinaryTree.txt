@@ -1,0 +1,22 @@
+﻿方法一：
+拿到这道题就想到前面写的求树高度的问题，因此就顺着求高度的思路来想了：
+首先用一个递归函数求每个节点左右子树的高度，然后判断左右子树高度差是否大于1，若大于，则设定标志位flag为false并返回。
+public class Solution {
+    boolean flag;
+    public boolean isBalanced(TreeNode root) {
+        flag = true;
+        judge(root);
+        return flag;
+    }
+    
+    public int judge(TreeNode tNode){
+        if(tNode == null) return 0;
+        int leftLen = 1 + judge(tNode.left);
+        int rightLen = 1 + judge(tNode.right);
+        if(Math.abs(rightLen - leftLen) > 1){
+            flag = false;
+            return -1;
+        } 
+        return leftLen > rightLen ? leftLen : rightLen;
+    }
+}

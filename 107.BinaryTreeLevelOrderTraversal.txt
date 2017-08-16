@@ -1,0 +1,22 @@
+思路：利用队列，将二叉树按先序存入队列中，首先将根节点存入队列中，保证队列不为空，在循环中每从队列取出一个节点，若该节点有左右子节点，就将该节点的左右子节点分别存入队列中。
+不断从队列中取元素直到队列为空。
+public class Solution {
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> wrapList = new ArrayList<List<Integer>>();
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        if(root == null) return wrapList;
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            int levelNum = queue.size();
+            List<Integer> subList = new ArrayList<Integer>();
+            for(int i = 0; i < levelNum; i++){
+                TreeNode tmp = queue.poll();
+                if(tmp.left != null) queue.offer(tmp.left);
+                if(tmp.right != null) queue.offer(tmp.right);
+                subList.add(tmp.val);
+            }
+            wrapList.add(0, subList);//每次都存到第一位
+        }
+        return wrapList;
+    }
+}
