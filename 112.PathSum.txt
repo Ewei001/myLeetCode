@@ -1,0 +1,21 @@
+﻿这道题很简单，这是我开始的做法，多了很多不必要的步骤，虽然也是通过了，但是代码不够整洁：
+class Solution {
+    public boolean hasPathSum(TreeNode root, int sum) {
+        if(root == null) return false;//这里我开始写的是return sum==0,因为我理解的树为空时sum为0，但其实树为空应返回false。
+        if(root.left == null && root.right == null) return root.val == sum;
+        boolean left = false, right = false;
+        if(root.left !=  null) left = hasPathSum(root.left, sum - root.val);
+        if(root.right != null) right = hasPathSum(root.right, sum - root.val);
+        return left || right;
+    }
+}
+默默地看了一下discuss区别人的代码，发现原理是一样的，但是省去了不必要步骤：
+class Solution {
+    public boolean hasPathSum(TreeNode root, int sum) {
+        if(root == null) return false;//这里我开始写的是return sum==0,因为我理解的树为空时sum为0，但其实树为空应返回false。
+        if(root.left == null && root.right == null) return root.val == sum;
+ 
+        //这里并不需要判断root的左右子树是否为空，因为在递归中为空自动返回false；
+        return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
+    }
+}
