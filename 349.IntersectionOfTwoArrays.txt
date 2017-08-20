@@ -1,0 +1,26 @@
+这道题比较简单，有多种解法
+方法一：借助set存放其中一组数据，再遍历另一组数组判断set是否contains.
+方法二：还有一种是先将两个数组排序（Array.sort(arr)），再定义两个指针分别从两个数组的第零位开始遍历，遇到相同就存入集合中，最后再将集合转换成数组。
+但是开始有个疑惑,以为两种方法时间复杂度都是o(n), 但其实方法一时间复杂度为o(n),方法二为o(nlogn);
+是因为Array.sort(arr)这个方法时间复杂度为o(nlogn),
+而HashSet的搜索方法时间复杂度其实是o(1)，因为它使用的是hashtable查找
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        Set<Integer> nums1Set = new HashSet<Integer>();
+        Set<Integer> intersection = new HashSet<Integer>();
+        
+        for(int i = 0; i < nums1.length; i++) nums1Set.add(nums1[i]);
+        
+        for(int i = 0; i < nums2.length; i++){
+            if(nums1Set.contains(nums2[i])) intersection.add(nums2[i]);
+        }
+        
+        int[] result = new int[intersection.size()];
+        int j = 0;
+        for(int num : intersection){
+            result[j] = num;
+            j++;
+        }
+        return result;
+    }
+}
