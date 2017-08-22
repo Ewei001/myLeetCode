@@ -1,0 +1,42 @@
+﻿拿到这个题第一个想法就是用循环把每个元素都减一遍
+第二个想法是动态规划，从后向前开始遍历当前一位小于后一位时，则前一位的利润就等于后一位值减去自己再加上后一位的利润
+但是当考虑到前一位值大于后一位时，怎么办呢？就得向后找到第一个比当前位大的，然后再用这个大的值减去当前值，并加上大值处的利润。
+那这样最大利润不就是从最后一位找到至当前位的最大值再减去当前位吗！
+直接在遍历时，判断当前值是否为最大值，是就将利润置0，并将当前值赋给最大值，否的话就用最大值减去当前值便得到当前的最大利润。
+于是写了如下的算法：
+class Solution {
+    public int maxProfit(int[] prices) {
+        int len = prices.length;
+        int maxPrice = 0;//用来记录当前位置到最后一个元素中的最大值
+        int maxProfit = 0;
+        int[] profit = new int[len];//用来记录每一天的最大利润
+        
+        for(int i = len - 1; i >= 0; i--){
+            if(prices[i] <= maxPrice){
+                profit[i] = maxPrice - prices[i];
+            }else{
+                maxPrice = prices[i];
+            }
+            if(profit[i] > maxProfit) maxProfit = profit[i];
+        }
+        return maxProfit;
+    }
+}
+写的过程中又想到了一个问题，其实profit这个数组都是不需要的直接判断maxPrice减去当前price是否为最大值即可！
+简化如下：
+class Solution {
+    public int maxProfit(int[] prices) {
+        int len = prices.length;
+        int maxPrice = 0;//用来记录当前位置到最后一个元素中的最大值
+        int maxProfit = 0;
+        
+        for(int i = len - 1; i >= 0; i--){
+            if(prices[i] > maxPrice) maxPrice = prices[i];
+         
+            if(maxPrice - prices[i] > maxProfit) maxProfit = maxPrice - prices[i];
+        }
+        return maxProfit;
+    }
+}
+
+虽然这道题很简单，但是对比刚开始练题的时候，笔者已经感受到自己的思路逐渐清晰明了的整个过程，所以通过不断的练习加思考训练自己的思维方式还是很有用的。
