@@ -1,0 +1,60 @@
+﻿其实很久之前看到过这道题，就是说有面试可能会遇到，笔者当时虽然看了一种思路但并不是很理解：
+刚好在LeetCode上又遇到，看了下别人分享的解答，又结合之前网上的讲解，终于知道自己不能理解的问题是啥了！！！
+其实题目的本意是查询当前栈内最小元素，要求时间复杂度为o(1)，而我误以为每次找到最小值还需要把这个最小值remove掉，
+因此下一次再取最小值就不是上一次的值了。
+分享两种解法，其实都是看好心人分享之后学习的，感受到了智商上的差距……不过相信自己练的越多思考的越多，以后的思路就会越开阔~~
+
+方法一：由于自己之前看过这个问题，所以做到这题时第一想法就是这个思路
+使用两个链表，分别用来存储栈元素和当前栈中最小元素。
+
+方法二：写完后又去discuss区看了下别人的分享，只需要使用一个栈就可以。
+思路：只需要定义一个变量保存当前最小的值，和一个栈存储x-min(x为当前值)，
+push：
+当栈为空时，min=x; 每存一个元素，比较当前元素值是否小于min，若小于则先存入x-min，再min=x;
+pop:线判断栈是否为空，是则return
+判断当前栈顶元素是否小于0，是则min=min-pop, 否则说明当前栈顶元素原值不是min,因此删除对min值无影响
+top:
+从栈中取元素，判断取出值是否小于0，若是，说明存值时x<min，要取得x即为min，否则取值为（x+min）
+getMin：
+直接返回min值即可。
+
+public class MinStack {
+    long min;
+    Stack<Long> stack;
+
+    public MinStack(){
+        stack=new Stack<>();
+    }
+    
+    public void push(int x) {
+        if (stack.isEmpty()){
+            stack.push(0L);
+            min=x;
+        }else{
+            stack.push(x-min);//Could be negative if min value needs to change
+            if (x<min) min=x;
+        }
+    }
+
+    public void pop() {
+        if (stack.isEmpty()) return;
+        
+        long pop=stack.pop();
+        
+        if (pop<0)  min=min-pop;//If negative, increase the min value
+        
+    }
+
+    public int top() {
+        long top=stack.peek();
+        if (top>0){
+            return (int)(top+min);
+        }else{
+           return (int)(min);
+        }
+    }
+
+    public int getMin() {
+        return (int)min;
+    }
+}
