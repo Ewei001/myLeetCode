@@ -1,0 +1,52 @@
+﻿以下给出两种解法及思路。
+方法一：
+一般情况下，大家都能想到的第一种方法：，就是先得到两个list的长度，然后对较长的list先遍历直到两个list等长，再同时遍历两个list，并判断当前两个节点是否相同，相同则return其中一个节点。
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        int aLen = 0, bLen = 0;
+        ListNode nodeA = headA, nodeB = headB;
+        while(nodeA != null){
+            nodeA = nodeA.next;
+            aLen++;
+        }
+        while(nodeB != null){
+            nodeB = nodeB.next;
+            bLen++;
+        }
+        if(aLen > bLen){
+            int len = aLen - bLen;
+            while(len > 0){
+                headA = headA.next;
+                len--;
+            }
+        }else if(bLen > aLen){
+            int len = bLen - aLen;
+            while(len > 0){
+                headB = headB.next;
+                len--;
+            }
+        }
+        while(headA != null){
+            if(headA.val == headB.val) return headA;
+            headA = headA.next;
+            headB = headB.next;
+        }
+        return null;
+    }
+}
+方法二：
+代码非常简洁，感受到了智商上的差距
+思路：若a,b等长，直接遍历到a == b的节点，或者没有交叉直到a==null;
+若a,b不等长，分别用两个指针遍历两个链表，直到较短链的指针到达链尾，当前的节点为空时，再将较长链表的头结点赋给该指针；当长链表上的指针到达链尾时，将短链表头结点赋给该指针，此时两个指针指向的位置到达链尾的长度相同，因此就可以同时进行遍历比较每一个节点是否相同，第一个相同的即为交叉节点return。
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if(headA == null || headB == null) return null;
+		ListNode a = headA;
+		ListNode b = headB;
+		while(a != b){
+		    a = a == null ? headB : a.next;
+			b = b == null ? headA : b.next;
+		}
+		return a;
+    }
+}
