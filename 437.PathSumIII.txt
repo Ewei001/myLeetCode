@@ -1,0 +1,15 @@
+﻿开始思路：定义一个count用来计数，递归分别遍历左右子树，每次递归将sum减去当前的val值并传入下一次递归，但是这样只考虑了从根节点向下遍历这一种情况，还需要从每个节点向下进行遍历看是否存在和为sum的，
+开始笔者想到了一种看起来比较麻烦的方法，即每次递归传sum的同时，将这一路sum-value值存入一种数据结构中，然后在每个递归中循环该数据结构，判断是否存在sum==val,存在则count+1; 
+
+思路二：其实本质上和思路一是相同的，使用两个递归，一个用来递归从根节点开始的和，另一个通过调用前一个递归来从当前结点开始向下判断：
+
+public class Solution{
+	public int pathSum(TreeNode root, int sum){
+		if(root == null) return 0;
+		return pathSum(root.left, sum) + pathSum(root.right, sum) + pathSumFrom(root, sum);
+	}
+	public int pathSumFrom(TreeNode root, int sum){
+		if(root == null) return 0;
+		return (root.val == sum ? 1 : 0) + pathSumFrom(root.left, sum - root.val) + pathSumFrom(root.right, sum - root.val);
+	}
+}

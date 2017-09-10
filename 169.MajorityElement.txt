@@ -1,0 +1,20 @@
+﻿拿到这题第一个想法是，用键值对来存数(值key)和它们出现的次数(value),最后找出数值最多的那个
+后来去了discuss区看了别人分享的，想了半天也不能理解，又看了看别人的reply，终于想明白了。
+先看一下算法：
+public int majorityElement(int[] nums) {
+        int majority = nums[0];
+        int count = 1;
+        for(int i = 1; i < nums.length; i++){
+            if(count == 0){
+                majority = nums[i];
+                count++;
+            }else if(majority == nums[i]){
+                count++;
+            }else{
+                count--;
+            }
+        }
+        return majority;
+    }
+疑惑就是如果我的输入时{2，2，3，5，8}时，那return的不就是8，而不是3了吗
+然鹅遗漏了一个重要的条件就是，return出现次数大于n/2的，并且题目假设这个majority element是一定存在的，因此最后count>=0的一定是出现次数大于n/2的元素。
